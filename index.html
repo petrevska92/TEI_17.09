@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <title>My CETEIcean project</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="css/CETEIcean.css" />
+   <link rel="stylesheet" href="css/style.css" />
+   <script src="js/CETEIcean.js"></script>
+ </head>
+ <body>
+   <h1 id="tei-titleStmt/tei-title"></h1>
+   <h2 id="tei-titleStmt/tei-author">
+   <div id="TEI"></div>
+   <script>
+     var CETEIcean = new CETEI()
+     CETEIcean.addBehaviors({
+       "tei": {
+         "head": function(e) {
+           let s = document.createElement("span");
+           s.innerHTML = e.innerHTML;
+           return s;
+         /*["<a href=\'http://google.com'>", "</a>"] */
+          },
+        "persName": function(el) {
+         var a = document.createElement("a")
+           a.setAttribute("href", el.getAttribute("ref"))
+           a.innerHTML = el.innerHTML;
+           return a
+
+       }
+     }
+     });
+     CETEIcean.getHTML5("data/herbsttag.xml", function(data) {
+      document.getElementById("TEI").appendChild(data)
+     })
+   </script>
+ </body>
+</html>
